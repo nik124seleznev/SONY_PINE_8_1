@@ -1,7 +1,7 @@
 #!/bin/bash
-cd /home/nik-kst/Android/sony/kernel-3.18
-rm -rf /home/nik-kst/Android/sony/kernel-3.18/out
-mkdir /home/nik-kst/Android/sony/kernel-3.18/out
+cd /home/nik-kst/Android/sony/SONY_PINE_8_1
+rm -rf /home/nik-kst/Android/sony/SONY_PINE_8_1/out
+mkdir /home/nik-kst/Android/sony/SONY_PINE_8_1/out
 
 export ARCH=arm64
 export SUBARCH=arm64

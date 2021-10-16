@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/nik-kst/Android/sony/kernel-3.18
+cd /home/nik-kst/Android/sony/SONY_PINE_8_1
 export ARCH=arm64
 export SUBARCH=arm64
 export CROSS_COMPILE=/home/nik-kst/Android/t-alps-release-o1.mp1-V2.86/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
