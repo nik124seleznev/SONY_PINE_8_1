@@ -1761,6 +1761,11 @@ initrd=0x44000000,0x300000 loglevel=8 androidboot.hardware=mt6735";
 			compatible = "mediatek,mt6735-touch";
 			vtouch-supply = <&mt_pmic_vgp1_ldo_reg>;
 		};
+//<--[nik-kst][SM31][Sensors][JasonHsing] Hall sensor driver porting 20161004 BEGIN --
+		hall_1: hall_1@2 {
+			compatible = "mediatek,mt6735-hall_1";
+		};
+//-->[nik-kst][SM31][Sensors][JasonHsing] Hall sensor driver porting 20161004 END --
 
 		accdet: accdet {
 			compatible = "mediatek,mt6735-accdet";
@@ -2983,6 +2988,36 @@ initrd=0x44000000,0x300000 loglevel=8 androidboot.hardware=mt6735";
 			compatible = "mediatek, dsi_te_1-eint";
 			status = "disabled";
 		};
+/*[nik-kst][Arima_8100][bozhi_lin] rt1711 set USB_INT_N as gpio81 and fix stack error 20161117 begin*/
+/*[nik-kst][Arima_8100][bozhi_lin] RichTek rt1711 usb type c driver porting rev16 20161101 begin*/
+/*[nik-kst][Arima_8100][bozhi_lin] RichTek rt1711 usb type c driver porting 20161019 begin*/
+		rt1711: type_c_port0 {
+			rt-dual,supported_modes = <2>; /* 0: dfp/ufp, 1: dfp, 2: ufp */
+			rt-tcpc,name = "type_c_port0"; /* tcpc_device's name */
+			rt-tcpc,role_def = <0>; /* 0: SNK Only, 1: SRC Only, 2: DRP, 3: Try.SRC, 4: Try.SNK */
+			rt-tcpc,rp_level = <0>; /* 0: Default, 1: 1.5, 2: 3.0 */
+			rt-tcpc,notifier_supply_num = <1>; /* the number of notifier supply */
+/*[nik-kst][Arima_8100][bozhi_lin] rt1711 set USB_INT_N as gpio4 from gpio81 20170101 begin*/
+			rt1711,irq_gpio = <&pio 4 0x0>;
+/*[nik-kst][Arima_8100][bozhi_lin] 20170101 end*/
+/*[nik-kst][Arima_8100][bozhi_lin] dynamic check hw varient to set rt1711 IRQ 20170103 begin*/
+			rt1711,irq_gpio_under_sp = <&pio 81 0x0>;
+			rt1711,pcba_ver0 = <&pio 58 0x0>;
+			rt1711,pcba_ver1 = <&pio 57 0x0>;
+			rt1711,pcba_ver2 = <&pio 86 0x0>;
+/*[nik-kst][Arima_8100][bozhi_lin] 20170103 end*/
+		};
+/*[nik-kst][Arima_8100][bozhi_lin] 20161019 end*/
+/*[nik-kst][Arima_8100][bozhi_lin] 20161101 end*/
+/*[nik-kst][Arima_8100][bozhi_lin] 20161117 end*/
+/*[nik-kst][Arima_8100][bozhi_lin] dynamic check hw varient to set rt1711 IRQ 20170103 begin*/
+		type_c_port0_under_sp {
+			interrupt-parent = <&eintc>;
+			interrupts = <81 IRQ_TYPE_EDGE_FALLING>;
+			debounce = <81 0>;
+			status = "okay";
+		};
+/*[nik-kst][Arima_8100][bozhi_lin] 20170103 end*/
 	};
 
 	vcorefs {
